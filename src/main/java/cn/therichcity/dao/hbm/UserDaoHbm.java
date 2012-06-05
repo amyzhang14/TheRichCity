@@ -1,6 +1,7 @@
 package cn.therichcity.dao.hbm;
 
 import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.orm.hibernate3.HibernateTemplate;
@@ -24,18 +25,27 @@ public class UserDaoHbm implements UserDao {
 		if (null == email) {
 			throw new NullPointerException("email cann't be null.");
 		}
-		
+
 		UserEntity user = new UserEntity();
 		user.setEmail(email);
-		List<UserEntity> list = (List<UserEntity>) this.hibernateTemplate.findByExample(user);
+		List<UserEntity> list = (List<UserEntity>) this.hibernateTemplate
+				.findByExample(user);
 
 		return list.isEmpty() ? null : list.get(0);
 	}
 
 	@Override
 	public int insert(UserEntity user) {
-		// TODO Auto-generated method stub
-		return 0;
+		if (null == user.getEmail() || null == user.getName()
+				|| null == user.getPassword()) {
+			throw new NullPointerException(
+					"email and name and password cann't be null.");
+		}
+
+		user.setUuid(null);
+		user.setRegisterDate(new Date());
+		this.hibernateTemplate.save(user);
+		return 1;
 	}
 
 	@Override

@@ -1,21 +1,20 @@
 package cn.therichcity.entity;
 
-import java.math.BigInteger;
 import java.util.Date;
 
 public class UserEntity extends BaseEntity {
-	private BigInteger uuid;
+	private Long uuid;
 	private String name;
 	private String password;
 	private String email;
 	private Long score;
 	private Date registerDate;
 
-	public BigInteger getUuid() {
+	public Long getUuid() {
 		return uuid;
 	}
 
-	public void setUuid(BigInteger uuid) {
+	public void setUuid(Long uuid) {
 		this.uuid = uuid;
 	}
 

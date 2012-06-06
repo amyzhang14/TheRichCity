@@ -1,8 +1,8 @@
-package cn.therichcity.dao;
+package cn.amychris.therichcity.dao;
 
 import java.math.BigInteger;
 
-import cn.therichcity.entity.UserEntity;
+import cn.amychris.therichcity.entity.UserEntity;
 
 public interface UserDao {
 	UserEntity getByEmail(String email);

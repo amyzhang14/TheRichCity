@@ -1,4 +1,4 @@
-package cn.therichcity.entity;
+package cn.amychris.therichcity.entity;
 
 import java.util.Date;
 

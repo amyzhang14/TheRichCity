@@ -1,4 +1,4 @@
-package cn.therichcity.dao.hbm;
+package cn.amychris.therichcity.dao.hbm;
 
 import java.math.BigInteger;
 import java.util.Date;
@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
-import cn.therichcity.dao.UserDao;
-import cn.therichcity.entity.UserEntity;
+import cn.amychris.therichcity.dao.UserDao;
+import cn.amychris.therichcity.entity.UserEntity;
 
 /*
  * @author Zhang Yanxia

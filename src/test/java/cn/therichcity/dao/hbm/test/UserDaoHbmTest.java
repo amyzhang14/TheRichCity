@@ -7,8 +7,8 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import cn.therichcity.dao.UserDao;
-import cn.therichcity.entity.UserEntity;
+import cn.amychris.therichcity.dao.UserDao;
+import cn.amychris.therichcity.entity.UserEntity;
 
 public class UserDaoHbmTest extends TestCase {
 

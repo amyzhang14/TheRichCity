@@ -45,7 +45,7 @@
 		</property>
 	</bean>
 	
-	<bean id="userDao" class="cn.therichcity.dao.hbm.UserDaoHbm">
+	<bean id="userDao" class="cn.amychris.therichcity.dao.hbm.UserDaoHbm">
 		<property name="hibernateTemplate">
 			<ref bean="hibernateTemplate"/>
 		</property>

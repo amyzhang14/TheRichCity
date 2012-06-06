@@ -39,18 +39,18 @@
     </logger> 
     
     <logger name="org.springframework">     
-        <priority value ="info"/>
+        <level value ="info"/>
         <appender-ref ref="fileAppender" />
     </logger>
     
     <logger name="org.hibernate">     
-        <priority value ="info"/>
+        <level value ="info"/>
         <appender-ref ref="hibernateAppender" />    
     </logger>    
      
     <!-- 根logger的设置-->     
     <root>     
-        <priority value ="trace"/>    
+        <level value ="trace"/>    
         <appender-ref ref="console" />     
     </root>     
 </log4j:configuration>

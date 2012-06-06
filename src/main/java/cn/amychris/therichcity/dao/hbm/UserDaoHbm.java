@@ -1,10 +1,13 @@
 package cn.amychris.therichcity.dao.hbm;
 
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Resource;
+
+import org.springframework.context.annotation.Scope;
 import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.springframework.stereotype.Repository;
 
 import cn.amychris.therichcity.dao.UserDao;
 import cn.amychris.therichcity.entity.UserEntity;
@@ -12,10 +15,14 @@ import cn.amychris.therichcity.entity.UserEntity;
 /*
  * @author Zhang Yanxia
  * 
+ * Implementation of <code>UserDao</code>, using Hibernate framework.
  */
 
+@Scope("prototype")
+@Repository("userDao")
 public class UserDaoHbm implements UserDao {
 
+	@Resource(name="hibernateTemplate")
 	private HibernateTemplate hibernateTemplate;
 
 	@SuppressWarnings("unchecked")
@@ -28,14 +35,13 @@ public class UserDaoHbm implements UserDao {
 
 		UserEntity user = new UserEntity();
 		user.setEmail(email);
-		List<UserEntity> list = (List<UserEntity>) this.hibernateTemplate
-				.findByExample(user);
+		List<UserEntity> list = (List<UserEntity>) this.hibernateTemplate.findByExample(user);
 
 		return list.isEmpty() ? null : list.get(0);
 	}
 
 	@Override
-	public int insert(UserEntity user) {
+	public Long insert(UserEntity user) {
 		if (null == user.getEmail() || null == user.getName()
 				|| null == user.getPassword()) {
 			throw new NullPointerException(
@@ -44,27 +50,21 @@ public class UserDaoHbm implements UserDao {
 
 		user.setUuid(null);
 		user.setRegisterDate(new Date());
-		this.hibernateTemplate.save(user);
-		return 1;
+		return (Long)this.hibernateTemplate.save(user);
 	}
 
 	@Override
-	public int delete(BigInteger uuid) {
-		// TODO Auto-generated method stub
-		return 0;
+	public void delete(Long uuid) {
+		UserEntity user = new UserEntity();
+		user.setUuid(uuid);
+		this.hibernateTemplate.delete(user);
 	}
 
 	@Override
-	public int update(UserEntity user) {
-		// TODO Auto-generated method stub
-		return 0;
+	public void update(UserEntity user) {
+		user.setLastUpdateTime(null);
+		user.setRegisterDate(null);
+		this.hibernateTemplate.update(user);
 	}
 
-	public HibernateTemplate getHibernateTemplate() {
-		return hibernateTemplate;
-	}
-
-	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
-		this.hibernateTemplate = hibernateTemplate;
-	}
 }

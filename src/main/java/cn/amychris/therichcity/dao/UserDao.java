@@ -1,15 +1,15 @@
 package cn.amychris.therichcity.dao;
 
-import java.math.BigInteger;
-
 import cn.amychris.therichcity.entity.UserEntity;
 
 public interface UserDao {
+	
+	
 	UserEntity getByEmail(String email);
 
-	int insert(UserEntity user);
+	Long insert(UserEntity user);
 
-	int delete(BigInteger uuid);
+	void delete(Long uuid);
 
-	int update(UserEntity user);
+	void update(UserEntity user);
 }

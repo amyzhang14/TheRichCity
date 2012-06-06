@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
+	<context:annotation-config /> 
+	
+	<context:component-scan base-package="cn.amychris.therichcity.dao.hbm" />
 	
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<constructor-arg ref="mySQLDriver" />
-		<constructor-arg value="jdbc:mysql://localhost:3306/therichcity" />
+		<constructor-arg value="jdbc:mysql://192.168.1.102:3306/theRichCity" />
 		<constructor-arg value="AmyChris" />
 		<constructor-arg value="123456" />
 	</bean>
@@ -43,14 +48,7 @@
 		<property name="jdbcExceptionTranslator">
 			<ref bean="jdbcExceptionTranslator"/>
 		</property>
-	</bean>
-	
-	<bean id="userDao" class="cn.amychris.therichcity.dao.hbm.UserDaoHbm">
-		<property name="hibernateTemplate">
-			<ref bean="hibernateTemplate"/>
-		</property>
-	</bean>
-	
+	</bean>	
 	
 	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />

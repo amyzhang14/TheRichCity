@@ -1,5 +1,7 @@
 package cn.amychris.therichcity.dao;
 
+import java.util.List;
+
 import cn.amychris.therichcity.entity.UserEntity;
 
 public interface UserDao {
@@ -9,7 +11,7 @@ public interface UserDao {
 
 	Long insert(UserEntity user);
 
-	void delete(Long uuid);
+	void delete(List<Long> uuid);
 
 	void update(UserEntity user);
 }

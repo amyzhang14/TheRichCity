@@ -1,5 +1,6 @@
 package cn.amychris.therichcity.dao.hbm;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,7 +23,7 @@ import cn.amychris.therichcity.entity.UserEntity;
 @Repository("userDao")
 public class UserDaoHbm implements UserDao {
 
-	@Resource(name="hibernateTemplate")
+	@Resource(name = "hibernateTemplate")
 	private HibernateTemplate hibernateTemplate;
 
 	@SuppressWarnings("unchecked")
@@ -42,22 +43,34 @@ public class UserDaoHbm implements UserDao {
 
 	@Override
 	public Long insert(UserEntity user) {
-		if (null == user.getEmail() || null == user.getName()
-				|| null == user.getPassword()) {
-			throw new NullPointerException(
-					"email and name and password cann't be null.");
+		if (null == user.getEmail() || null == user.getName() || null == user.getPassword()) {
+			throw new NullPointerException("email and name and password cann't be null.");
 		}
 
 		user.setUuid(null);
 		user.setRegisterDate(new Date());
-		return (Long)this.hibernateTemplate.save(user);
+		return (Long) this.hibernateTemplate.save(user);
 	}
 
 	@Override
-	public void delete(Long uuid) {
-		UserEntity user = new UserEntity();
-		user.setUuid(uuid);
-		this.hibernateTemplate.delete(user);
+	public void delete(List<Long> uuids) {
+		if (null == uuids) {
+			throw new NullPointerException("Uuids couldn't be null.");
+		}
+
+		if (uuids.isEmpty()) {
+			return;
+		}
+
+		List<UserEntity> entities = new ArrayList<UserEntity>();
+
+		for (Long uuid : uuids) {
+			UserEntity user = new UserEntity();
+			user.setUuid(uuid);
+			entities.add(user);
+		}
+
+		this.hibernateTemplate.deleteAll(entities);
 	}
 
 	@Override

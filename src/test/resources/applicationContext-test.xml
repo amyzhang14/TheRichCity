@@ -11,7 +11,7 @@
 	
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<constructor-arg ref="mySQLDriver" />
-		<constructor-arg value="jdbc:mysql://192.168.1.102:3306/theRichCity" />
+		<constructor-arg value="jdbc:mysql://192.168.1.4:3306/theRichCity" />
 		<constructor-arg value="AmyChris" />
 		<constructor-arg value="123456" />
 	</bean>

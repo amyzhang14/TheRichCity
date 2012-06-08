@@ -1,5 +1,5 @@
 package cn.amychris.therichcity.game;
 
-public interface Game {
+public interface Game extends Runnable {
 
 }

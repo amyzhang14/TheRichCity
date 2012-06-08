@@ -14,7 +14,7 @@ import cn.amychris.therichcity.dao.UserDao;
 import cn.amychris.therichcity.entity.UserEntity;
 
 /*
- * @author Zhang Yanxia
+ * @author Amy Zhang
  * 
  * Implementation of <code>UserDao</code>, using Hibernate framework.
  */

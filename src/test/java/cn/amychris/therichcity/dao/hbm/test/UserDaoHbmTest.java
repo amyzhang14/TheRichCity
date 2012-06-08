@@ -6,9 +6,9 @@ import org.junit.Test;
 
 import cn.amychris.therichcity.dao.UserDao;
 import cn.amychris.therichcity.entity.UserEntity;
-import cn.amychris.therichcity.test.BaseTestCase;
+import cn.amychris.therichcity.test.BaseAppContextTestCase;
 
-public class UserDaoHbmTest extends BaseTestCase {
+public class UserDaoHbmTest extends BaseAppContextTestCase {
 
 	@Test
 	public void getByEmailSuccessfully() {

@@ -12,7 +12,7 @@ public class Session {
 	
 	private Date startTime;
 
-	Date getStartTime() {
+	public Date getStartTime() {
 		return startTime;
 	}
 

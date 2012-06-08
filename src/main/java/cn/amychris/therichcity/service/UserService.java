@@ -15,5 +15,4 @@ public interface UserService {
 	
 	void removeUsers(List<UserEntity> users);
 	
-	Session login(UserEntity user);
 }

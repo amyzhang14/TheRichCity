@@ -5,6 +5,7 @@ CREATE TABLE theRichCity.t_user (
 	nme VARCHAR(20) NOT NULL UNIQUE,
 	eml VARCHAR(30) NOT NULL UNIQUE,
 	pwd VARCHAR(20) NOT NULL,
+	score LONG,
 	rgst_dt DATETIME NOT NULL,
     lst_updt_tme TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	PRIMARY KEY(uuid)
@@ -19,11 +20,8 @@ CREATE TABLE theRichCity.t_session (
     lst_updt_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+GRANT ALL PRIVILEGES ON theRichCity.* TO 'AmyChris'@'%'  IDENTIFIED BY '123456';
 
- GRANT ALL PRIVILEGES ON therichcity.* TO 'AmyChris'@'%'  IDENTIFIED BY '123456';
-
-
-ALTER TABLE theRichCity.t_user ADD score LONG;
 
 INSERT INTO theRichCity.t_user(nme,eml,pwd,rgst_dt) VALUES ('amyzhang','zhangyanxia14@163.com','123456',CURRENT_TIMESTAMP);
 

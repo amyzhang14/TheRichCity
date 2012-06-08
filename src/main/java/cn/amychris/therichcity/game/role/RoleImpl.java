@@ -1,24 +1,21 @@
 package cn.amychris.therichcity.game.role;
 
-import java.awt.Color;
-
+import cn.amychris.therichcity.game.CardInfo;
 
 public class RoleImpl implements Role {
-	
+
 	private boolean isKilled = false;;
-	
+
 	private boolean isStolen = false;
-	
-	private RoleInfo roleInfo;
-	
-	private Color color;
-	
+
+	private CardInfo roleInfo;
+
 	private int playOrder;
-	
+
 	private RoleSkill prePassiveSkill;
-	
+
 	private RoleSkill postPassiveSkill;
-	
+
 	private RoleSkill activeSkill;
 
 	@Override
@@ -35,19 +32,13 @@ public class RoleImpl implements Role {
 		return isStolen;
 	}
 
-
 	protected void setStolen(boolean isStolen) {
 		this.isStolen = isStolen;
 	}
 
 	@Override
-	public RoleInfo getRoleInfo() {
+	public CardInfo getRoleInfo() {
 		return roleInfo;
-	}
-
-	@Override
-	public Color getColor() {
-		return color;
 	}
 
 	@Override
@@ -71,22 +62,8 @@ public class RoleImpl implements Role {
 	}
 
 	@Override
-	public void acquireMoney() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void endMyTurn() {
 
-	@Override
-	public void buildConstructure() {
-		// TODO Auto-generated method stub
-		
 	}
-
-	@Override
-	public void acuireConstuctureCard() {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 }

@@ -1,33 +1,24 @@
 package cn.amychris.therichcity.game.role;
 
-import java.awt.Color;
-
+import cn.amychris.therichcity.game.Card;
 
 /*
  * @author Christian Chen
  */
-public interface Role {
+public interface Role extends Card {
 
 	boolean isKilled();
-	
+
 	boolean isStolen();
-	
-	Color getColor();
-	
-	RoleInfo getRoleInfo();
-	
+
 	int getPlayOrder();
-	
-	void acquireMoney();
-	
-	void acuireConstuctureCard();
-	
-	void buildConstructure();
-	
+
 	void performPrePassiveSkill(Role... roles);
-	
+
 	void performPostPassiveSkill(Role... roles);
-	
+
 	void performActiveSkill(Role... roles);
-	
+
+	void endMyTurn();
+
 }

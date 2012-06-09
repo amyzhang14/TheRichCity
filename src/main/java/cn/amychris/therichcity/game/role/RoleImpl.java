@@ -37,7 +37,7 @@ public class RoleImpl implements Role {
 	}
 
 	@Override
-	public CardInfo getRoleInfo() {
+	public CardInfo getCardInfo() {
 		return roleInfo;
 	}
 

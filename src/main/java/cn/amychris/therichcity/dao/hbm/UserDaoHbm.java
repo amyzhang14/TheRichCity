@@ -19,7 +19,7 @@ import cn.amychris.therichcity.entity.UserEntity;
  * Implementation of <code>UserDao</code>, using Hibernate framework.
  */
 
-@Scope("prototype")
+@Scope("singleton")
 @Repository("userDao")
 public class UserDaoHbm implements UserDao {
 

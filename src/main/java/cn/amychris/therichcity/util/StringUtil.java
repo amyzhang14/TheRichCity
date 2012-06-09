@@ -1,10 +1,26 @@
 package cn.amychris.therichcity.util;
 
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class UUIDUtil {
+public class StringUtil {
 
 	public static final int UUID_LENGTH = 32;
+	
+	public static final String EMAIL_REGEX = "\\w+(\\.\\w+)*@\\w+(\\.\\w+)+";
+	
+	public static boolean isEmailAddress (String emailAddress)
+	{
+		if(null == emailAddress || emailAddress.length() == 0)
+		{
+			return false;
+		}
+		
+		Pattern emailPattern = Pattern.compile(EMAIL_REGEX);
+		Matcher emailMatcher = emailPattern.matcher(emailAddress);
+		return emailMatcher.matches();
+	}
 
 	public static String generateRandomUUID() {
 		Random random = new Random(System.currentTimeMillis()^System.nanoTime());
@@ -30,7 +46,7 @@ public class UUIDUtil {
 			return false;
 		}
 
-		for (int i = 0; i < UUIDUtil.UUID_LENGTH; ++i) {
+		for (int i = 0; i < StringUtil.UUID_LENGTH; ++i) {
 			char c = uuid.charAt(i);
 			
 			if ( ! (Character.isDigit(c) || Character.isLetter(c)) ) {

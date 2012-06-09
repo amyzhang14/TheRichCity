@@ -9,7 +9,7 @@ import cn.amychris.therichcity.exception.SecurityServiceException;
 import cn.amychris.therichcity.security.SecurityService;
 import cn.amychris.therichcity.security.SecurityServiceImpl;
 import cn.amychris.therichcity.security.Session;
-import cn.amychris.therichcity.util.UUIDUtil;
+import cn.amychris.therichcity.util.StringUtil;
 
 public class SecurityManagerImplTest {
 
@@ -27,7 +27,7 @@ public class SecurityManagerImplTest {
 		Assert.assertNotNull(session);
 		Assert.assertEquals(user, session.getUser());
 		Assert.assertNotNull(session.getStartTime());
-		Assert.assertTrue(UUIDUtil.isUUID(session.getSessionID()));
+		Assert.assertTrue(StringUtil.isUUID(session.getSessionID()));
 	}
 	
 	@Test

@@ -8,7 +8,7 @@ import java.util.Map;
 import cn.amychris.therichcity.entity.UserEntity;
 import cn.amychris.therichcity.exception.ExceedingMaxLoginUsersException;
 import cn.amychris.therichcity.exception.SecurityServiceException;
-import cn.amychris.therichcity.util.UUIDUtil;
+import cn.amychris.therichcity.util.StringUtil;
 
 public class SecurityServiceImpl implements SecurityService {
 
@@ -47,7 +47,7 @@ public class SecurityServiceImpl implements SecurityService {
 			loginMap.put(user, s);
 		}
 
-		s.setSessionID(UUIDUtil.generateRandomUUID());
+		s.setSessionID(StringUtil.generateRandomUUID());
 		s.setUser(user);
 		s.setStartTime(new Date());
 		return s;

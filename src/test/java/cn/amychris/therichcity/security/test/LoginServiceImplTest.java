@@ -6,12 +6,10 @@ import org.junit.Test;
 import cn.amychris.therichcity.entity.UserEntity;
 import cn.amychris.therichcity.exception.ExceedingMaxLoginUsersException;
 import cn.amychris.therichcity.exception.SecurityServiceException;
-import cn.amychris.therichcity.security.SecurityService;
-import cn.amychris.therichcity.security.SecurityServiceImpl;
-import cn.amychris.therichcity.security.Session;
-import cn.amychris.therichcity.util.UUIDUtil;
+import cn.amychris.therichcity.service.LoginService;
+import cn.amychris.therichcity.service.impl.LoginServiceImpl;
 
-public class SecurityManagerImplTest {
+public class LoginServiceImplTest {
 
 	@Test
 	public void loginSuccessfully() {
@@ -21,20 +19,17 @@ public class SecurityManagerImplTest {
 		user.setName("not-existing");
 		user.setPassword("password");
 		
-		SecurityService sm = new SecurityServiceImpl(500);
-		Session session = sm.login(user);
+		LoginService sm = new LoginServiceImpl(500);
+		sm.login(user);
 		
-		Assert.assertNotNull(session);
-		Assert.assertEquals(user, session.getUser());
-		Assert.assertNotNull(session.getStartTime());
-		Assert.assertTrue(UUIDUtil.isUUID(session.getSessionID()));
+		
 	}
 	
 	@Test
 	public void loginTwice() {
 		UserEntity user = new UserEntity();
 		user.setUuid(System.currentTimeMillis());
-		SecurityService sm = new SecurityServiceImpl(500);
+		LoginService sm = new LoginServiceImpl(500);
 		sm.login(user);
 		
 		try {
@@ -51,7 +46,7 @@ public class SecurityManagerImplTest {
 	public void meetMaxLoginUsers() {
 		UserEntity user = new UserEntity();
 		user.setUuid(System.currentTimeMillis());
-		SecurityService sm = new SecurityServiceImpl(1);
+		LoginService sm = new LoginServiceImpl(1);
 		sm.login(user);
 		
 		UserEntity user2 = new UserEntity();

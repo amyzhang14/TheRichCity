@@ -5,11 +5,11 @@ import java.net.URL;
 
 public interface CardInfo {
 
-	String getRoleName();
+	String getCardName();
 	
-	String getRoleDescription();
+	String getCardDescription();
 	
-	URL getRoleImageURL();
+	URL getCardImageURL();
 	
 	Color getColor();
 }

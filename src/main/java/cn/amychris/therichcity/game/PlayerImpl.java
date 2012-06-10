@@ -1,6 +1,5 @@
 package cn.amychris.therichcity.game;
 
-import java.util.Arrays;
 import java.util.List;
 
 import cn.amychris.therichcity.entity.UserEntity;
@@ -57,10 +56,10 @@ public class PlayerImpl implements Player {
 	}
 
 	@Override
-	public void acuireConstucture() {
+	public void acquireConstucture() {
 		Constructure[] selectables = this.game.getTop2Constructures();
 		
-		if ( ArrayUtil.isEmpty(selectables) ) {
+		if ( ArrayUtil.isBlank(selectables) ) {
 			// TODO I don't know what to do in this case at the moment.
 			return;
 		}

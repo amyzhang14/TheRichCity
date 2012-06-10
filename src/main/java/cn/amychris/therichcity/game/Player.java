@@ -20,7 +20,7 @@ public interface Player {
 
 	void acquireMoney();
 
-	void acuireConstucture();
+	void acquireConstucture();
 
 	void buildConstructure(Constructure constructure);
 }

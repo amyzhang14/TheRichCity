@@ -3,16 +3,12 @@ package cn.amychris.therichcity.service.impl;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Service;
-
 import cn.amychris.therichcity.entity.UserEntity;
 import cn.amychris.therichcity.exception.ExceedingMaxLoginUsersException;
 import cn.amychris.therichcity.exception.SecurityServiceException;
 import cn.amychris.therichcity.service.LoginService;
 
-@Scope("Singleton")
-@Service("loginService")
+
 public class LoginServiceImpl implements LoginService {
 
 	private List<UserEntity> loginUser;

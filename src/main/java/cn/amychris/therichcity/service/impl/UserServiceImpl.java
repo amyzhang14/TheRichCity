@@ -17,7 +17,7 @@ import cn.amychris.therichcity.exception.UserNotfoundException;
 import cn.amychris.therichcity.service.UserService;
 import cn.amychris.therichcity.validator.UserValidator;
 
-@Scope("Singleton")
+@Scope("singleton")
 @Service("userServiceImpl")
 public class UserServiceImpl implements UserService {
 	private static final transient Log log = LogFactory.getLog(UserServiceImpl.class);

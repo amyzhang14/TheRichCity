@@ -1,23 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
-	<context:annotation-config /> 
-	
-	<context:component-scan base-package="cn.amychris.therichcity.dao.hbm" />
-	
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<constructor-arg ref="mySQLDriver" />
-		<constructor-arg value="jdbc:mysql://192.168.1.6:3306/theRichCity" />
+		<constructor-arg value="jdbc:mysql://localhost:3306/theRichCity" />
 		<constructor-arg value="AmyChris" />
 		<constructor-arg value="123456" />
 	</bean>
-	
-	<bean id="mySQLDriver" class="com.mysql.jdbc.Driver"/>
-	
+
+	<bean id="mySQLDriver" class="com.mysql.jdbc.Driver" />
+
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
 		<property name="mappingResources">
 			<list>
@@ -31,40 +25,28 @@
 			</props>
 		</property>
 		<property name="dataSource">
-			<ref bean="dataSource"/>
+			<ref bean="dataSource" />
 		</property>
 	</bean>
-	
+
 	<bean id="jdbcExceptionTranslator" class="org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator">
 		<property name="dataSource">
-			<ref bean="dataSource"/>
+			<ref bean="dataSource" />
 		</property>
 	</bean>
-	
+
 	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
 		<property name="sessionFactory">
-			<ref bean="sessionFactory"/>
+			<ref bean="sessionFactory" />
 		</property>
 		<property name="jdbcExceptionTranslator">
-			<ref bean="jdbcExceptionTranslator"/>
+			<ref bean="jdbcExceptionTranslator" />
 		</property>
-	</bean>	
-	
+	</bean>
+
 	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+
 	
-	<bean id="userService" parent="transactionProxy">
-		<property name="target" ref="userServiceImpl"/>
-	</bean>
-	
-	<bean id="transactionProxy" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" abstract="true">
-		<property name="transactionManager" ref="transactionManager"/>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
-				<prop key="register*">PROPAGATION_REQUIRED,-Exception</prop>
-			</props>
-		</property>
-	</bean>
 </beans>

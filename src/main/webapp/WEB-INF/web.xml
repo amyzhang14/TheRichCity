@@ -7,7 +7,7 @@
 	version="3.0">
 
 	<display-name>The Rich City</display-name>
-	
+
 	<!-- Some containers like Tomcat do NOT keep system properties separate per web app. You have to use unique "webAppRootKey" context-params per web app then, to 
 		avoid clashes. Other containers like Resin do isolate each web app's system properties: Here you can use the default key (i.e. no "webAppRootKey" context-param at 
 		all) without worrying. -->
@@ -31,11 +31,16 @@
 		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
 		<param-value>client</param-value>
 	</context-param>
-	
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath*:applicationContext-*.xml</param-value>
+	</context-param>
+
 	<listener>
 		<listener-class>org.springframework.web.util.WebAppRootListener</listener-class>
 	</listener>
-	
+
 	<listener>
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
 	</listener>
@@ -43,7 +48,7 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-	
+
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>

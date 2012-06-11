@@ -18,7 +18,7 @@ import cn.amychris.therichcity.service.UserService;
 import cn.amychris.therichcity.validator.UserValidator;
 
 @Scope("Singleton")
-@Service("userService")
+@Service("userServiceImpl")
 public class UserServiceImpl implements UserService {
 	private static final transient Log log = LogFactory.getLog(UserServiceImpl.class);
 

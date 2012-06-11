@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<faces-config
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
+	version="2.1">
+
+	<application>
+		<variable-resolver>org.springframework.web.jsf.DelegatingVariableResolver</variable-resolver>
+		<locale-config>
+			<default-locale>zh_CN</default-locale>
+			<supported-locale>en</supported-locale>
+			<supported-locale>zh_CN</supported-locale>
+		</locale-config>
+		<!-- <message-bundle>messages</message-bundle> -->
+	</application>
+
+	<navigation-rule>
+		<from-view-id>/login.faces</from-view-id>
+		<navigation-case>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/login.faces</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>failure</from-outcome>
+			<to-view-id>/login.faces</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<managed-bean>
+		<managed-bean-name>loginAction</managed-bean-name>
+		<managed-bean-class>cn.amychris.therichcity.action.impl.LoginActionImpl</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+
+</faces-config>

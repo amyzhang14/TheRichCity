@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>登录</title>
+</h:head>
+
+<h:body>
+	<h:form id="userForm">
+		<h1>请登录</h1>
+		<div>
+			<div>
+				<span>用戶名</span> <span><h:inputText type="text" id="email" value="#{loginAction.userForm.email}" /> 
+				</span> <span>（请用邮箱登录）</span>
+			</div>
+			<div>
+				<span>密码</span> <span><h:inputText type="password" id="password" value="#{loginAction.userForm.password}" /> </span>
+			</div>
+		</div>
+		<div>
+			<h:commandButton type="submit" action="login" name="登录" />
+		</div>
+	</h:form>
+</h:body>
+
+</html>

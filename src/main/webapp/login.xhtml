@@ -3,27 +3,38 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+<f:view>
+	<h:head>
+		<title>登录</title>
+	</h:head>
 
-<h:head>
-	<title>登录</title>
-</h:head>
+	<h:body>
+		<h:form id="userForm">
 
-<h:body>
-	<h:form id="userForm">
-		<h1>请登录</h1>
-		<div>
-			<div>
-				<span>用戶名</span> <span><h:inputText type="text" id="email" value="#{loginAction.userForm.email}" /> 
-				</span> <span>（请用邮箱登录）</span>
-			</div>
-			<div>
-				<span>密码</span> <span><h:inputText type="password" id="password" value="#{loginAction.userForm.password}" /> </span>
-			</div>
-		</div>
-		<div>
-			<h:commandButton id="submit" type="submit" action="login" value="登录" />
-		</div>
-	</h:form>
-</h:body>
+			<h:outputLabel value="请登录" />
 
+			<h:panelGrid columns="2">
+
+				<h:outputText value="用户名" />
+				<h:panelGroup>
+					<h:inputText type="text" id="email" value="#{loginAction.userForm.email}" required="#{true}" />
+					<h:outputText value="（请用邮箱登录）" />
+					<h:message for="email" value="请输入用户名（邮箱）" />
+				</h:panelGroup>
+
+				<h:outputText value="密码" />
+				<h:panelGroup>
+					<h:inputSecret id="password" value="#{loginAction.userForm.password}" required="#{true}" />
+					<h:message for="password" value="请输入密码" />
+				</h:panelGroup>
+
+				<h:panelGroup>
+					<h:commandButton id="submit" type="submit" action="login" value="登录" />
+				</h:panelGroup>
+
+			</h:panelGrid>
+
+		</h:form>
+	</h:body>
+</f:view>
 </html>

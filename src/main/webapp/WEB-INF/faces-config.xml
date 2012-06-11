@@ -17,14 +17,14 @@
 	</application>
 
 	<navigation-rule>
-		<from-view-id>/login.faces</from-view-id>
+		<from-view-id>/login.jsf</from-view-id>
 		<navigation-case>
 			<from-outcome>success</from-outcome>
-			<to-view-id>/login.faces</to-view-id>
+			<to-view-id>/login.jsf</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>failure</from-outcome>
-			<to-view-id>/login.faces</to-view-id>
+			<to-view-id>/login.jsf</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 

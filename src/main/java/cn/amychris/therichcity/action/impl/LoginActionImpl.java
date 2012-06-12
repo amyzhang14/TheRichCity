@@ -20,6 +20,7 @@ import cn.amychris.therichcity.validator.UserFormValidator;
 public class LoginActionImpl implements LoginAction {
 
 	@Autowired
+	@Qualifier("loginService")
 	private LoginService loginService;
 
 	@Autowired
@@ -27,19 +28,16 @@ public class LoginActionImpl implements LoginAction {
 	private UserService userService;
 
 	@Autowired
-	private UserFormValidator userFormValidor;
+	@Qualifier("userFormLoginValidor")
+	private UserFormValidator userFormLoginValidor;
 
 	private List<String> errorMsgs;
 	
 	private UserForm userForm = new UserForm();
 
-	public UserForm getUserForm () {
-		return userForm;
-	}
-
 	@Override
 	public String login () {
-		errorMsgs = userFormValidor.validate(userForm);
+		errorMsgs = userFormLoginValidor.validate(userForm);
 		if ( !errorMsgs.isEmpty() ) {
 			return "loginFailed";
 		}
@@ -74,6 +72,8 @@ public class LoginActionImpl implements LoginAction {
 		return errorMsgs;
 	}
 	
-	
+	public UserForm getUserForm () {
+		return userForm;
+	}
 
 }

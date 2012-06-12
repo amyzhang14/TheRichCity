@@ -2,8 +2,8 @@ package cn.amychris.therichcity.action.impl;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -15,17 +15,18 @@ import cn.amychris.therichcity.service.LoginService;
 import cn.amychris.therichcity.service.UserService;
 import cn.amychris.therichcity.validator.UserFormValidator;
 
-@Scope ("Prototype")
+@Scope ("prototype")
 @Controller ("loginAction")
 public class LoginActionImpl implements LoginAction {
 
-	@Resource (name = "loginService")
+	@Autowired
 	private LoginService loginService;
 
-	@Resource (name = "userService")
+	@Autowired
+	@Qualifier("userService")
 	private UserService userService;
 
-	@Resource (name = "userFormLoginValidor")
+	@Autowired
 	private UserFormValidator userFormValidor;
 
 	private List<String> errorMsgs;

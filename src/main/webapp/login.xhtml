@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 <f:view>
 	<h:head>
 		<title>登录</title>
@@ -10,6 +11,14 @@
 
 	<h:body>
 		<h:form id="userForm">
+		
+			<c:if test="${ ! empty loginAction.errorMsgs }" >
+				<h:panelGrid columns="1">
+					<c:forEach var="msg" items="${loginAction.errorMsgs}" >
+						<h:outputText value="${msg}" />
+					</c:forEach>
+				</h:panelGrid>
+			</c:if>
 
 			<h:outputLabel value="请登录" />
 
@@ -28,10 +37,8 @@
 					<h:message for="password" value="请输入密码" />
 				</h:panelGroup>
 
-				<h:panelGroup>
-					<h:commandButton id="submit" type="submit" action="login" value="登录" />
-				</h:panelGroup>
-
+				<h:commandButton id="submit" type="submit" action="#{loginAction.login}" value="登录" />
+				<h:commandButton id="toRegister" type="button" value="注册" />
 			</h:panelGrid>
 
 		</h:form>

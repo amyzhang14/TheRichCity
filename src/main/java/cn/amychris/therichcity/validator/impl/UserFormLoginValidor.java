@@ -11,7 +11,7 @@ import cn.amychris.therichcity.util.StringUtil;
 import cn.amychris.therichcity.validator.UserFormValidator;
 
 @Scope("singleton")
-@Component("userFormLoginValidor")
+@Component("userFormLoginValidator")
 public class UserFormLoginValidor implements UserFormValidator {
 	@Override
 	public List<String> validate (UserForm userForm) {

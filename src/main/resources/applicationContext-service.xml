@@ -8,6 +8,8 @@
 	<context:component-scan
 		base-package="cn.amychris.therichcity.dao.hbm,cn.amychris.therichcity.service.impl,cn.amychris.therichcity.validator.impl,cn.amychris.therichcity.action.impl" />
 
+
+        
 	<bean id="loginService" class="cn.amychris.therichcity.service.impl.LoginServiceImpl" scope="singleton">
 		<constructor-arg value="500" />
 	</bean>

@@ -17,13 +17,15 @@
 	</application>
 
 	<navigation-rule>
-		<from-view-id>/login.jsf</from-view-id>
+		<from-view-id>/login.xhtml</from-view-id>
+		
 		<navigation-case>
-			<from-outcome>success</from-outcome>
+			<from-outcome>Login Successfully</from-outcome>
 			<to-view-id>/login.jsf</to-view-id>
 		</navigation-case>
+		
 		<navigation-case>
-			<from-outcome>failure</from-outcome>
+			<from-outcome>Login Unsuccessfully</from-outcome>
 			<to-view-id>/login.jsf</to-view-id>
 		</navigation-case>
 	</navigation-rule>
@@ -32,6 +34,21 @@
 		<managed-bean-name>loginAction</managed-bean-name>
 		<managed-bean-class>cn.amychris.therichcity.action.impl.LoginActionImpl</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
+		
+		<managed-property>
+			<property-name>loginService</property-name>
+			<value>#{loginService}</value>
+		</managed-property>
+		
+		<managed-property>
+			<property-name>userService</property-name>
+			<value>#{userService}</value>
+		</managed-property>
+		
+		<managed-property>
+			<property-name>userFormLoginValidator</property-name>
+			<value>#{userFormLoginValidator}</value>
+		</managed-property>
 	</managed-bean>
 
 </faces-config>

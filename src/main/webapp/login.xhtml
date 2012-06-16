@@ -13,7 +13,11 @@
 		<h:form id="userForm">
 		
 			<c:if test="${ ! empty loginAction.errorMsgs }" >
-				<h:outputLabel value="错误了！" />
+				<h:panelGrid columns="1">
+					<c:forEach var="msg" items="${loginAction.errorMsgs}" >
+						<h:outputText value="${msg}" />
+					</c:forEach>
+				</h:panelGrid>
 			</c:if>
 
 			<h:outputLabel value="请登录" />

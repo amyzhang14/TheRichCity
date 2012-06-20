@@ -3,6 +3,7 @@ package cn.amychris.therichcity.transformer;
 import org.apache.commons.beanutils.BeanUtils;
 
 import cn.amychris.therichcity.entity.UserEntity;
+import cn.amychris.therichcity.exception.UserTransformingException;
 import cn.amychris.therichcity.form.UserForm;
 
 public class UserTransformer {

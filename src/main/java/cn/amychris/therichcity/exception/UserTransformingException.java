@@ -1,6 +1,5 @@
-package cn.amychris.therichcity.transformer;
+package cn.amychris.therichcity.exception;
 
-import cn.amychris.therichcity.exception.TheRichCityException;
 
 public class UserTransformingException extends TheRichCityException {
 	/**

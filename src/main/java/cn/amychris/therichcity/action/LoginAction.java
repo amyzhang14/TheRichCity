@@ -10,8 +10,6 @@ public interface LoginAction {
 	String login();
 	
 	String changePasswd();
-	
-	String register();
 
 	List<String> getErrorMsgs();
 	

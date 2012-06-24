@@ -58,11 +58,6 @@ public class LoginActionImpl implements LoginAction {
 		return null;
 	}
 
-	@Override
-	public String register () {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	public List<String> getErrorMsgs () {
 		return errorMsgs;

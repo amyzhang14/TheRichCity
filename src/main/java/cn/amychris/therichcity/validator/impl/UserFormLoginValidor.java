@@ -27,7 +27,7 @@ public class UserFormLoginValidor implements UserFormValidator {
 
 		//validate the passwd
 		if (StringUtil.isBlank(userForm.getPassword())) {
-			errorMesg.add("密碼不能為空。");
+			errorMesg.add("密码不能为空");
 		}
 		
 		return errorMesg;

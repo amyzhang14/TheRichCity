@@ -16,26 +16,6 @@
 		<!-- <message-bundle>messages</message-bundle> -->
 	</application>
 
-	<navigation-rule>
-		<from-view-id>/login.xhtml</from-view-id>
-		
-		<navigation-case>
-			<from-outcome>Login Successfully</from-outcome>
-			<to-view-id>/login.jsf</to-view-id>
-		</navigation-case>
-		
-		<navigation-case>
-			<from-outcome>Login Unsuccessfully</from-outcome>
-			<to-view-id>/login.jsf</to-view-id>
-		</navigation-case>
-		
-		<navigation-case>
-			<from-outcome>register</from-outcome>
-			<to-view-id>/register.xhtml</to-view-id>
-		</navigation-case>
-		
-	</navigation-rule>
-
 	<managed-bean>
 		<managed-bean-name>loginAction</managed-bean-name>
 		<managed-bean-class>cn.amychris.therichcity.action.impl.LoginActionImpl</managed-bean-class>
@@ -50,15 +30,10 @@
 			<property-name>userService</property-name>
 			<value>#{userService}</value>
 		</managed-property>
-		
-		<managed-property>
-			<property-name>userFormLoginValidator</property-name>
-			<value>#{userFormLoginValidator}</value>
-		</managed-property>
 	</managed-bean>
 	
 	<managed-bean>
-		<managed-bean-name>RegisterAction</managed-bean-name>
+		<managed-bean-name>registerAction</managed-bean-name>
 		<managed-bean-class>cn.amychris.therichcity.action.impl.RegisterActionImpl</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 		
@@ -67,6 +42,12 @@
 			<value>#{userService}</value>
 		</managed-property>
 	
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>baseAction</managed-bean-name>
+		<managed-bean-class>cn.amychris.therichcity.action.impl.BaseActionImpl</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 
 </faces-config>

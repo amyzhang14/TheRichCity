@@ -11,14 +11,6 @@
 
 	<h:body>
 		<h:form id="userForm">
-		
-			<c:if test="${ ! empty loginAction.errorMsgs }" >
-				<h:panelGrid columns="1">
-					<c:forEach var="msg" items="${loginAction.errorMsgs}" >
-						<h:outputText value="${msg}" />
-					</c:forEach>
-				</h:panelGrid>
-			</c:if>
 
 			<h:outputLabel value="请登录" />
 
@@ -38,7 +30,7 @@
 				</h:panelGroup>
 
 				<h:commandButton id="submit" type="submit" action="#{loginAction.login}" value="登录" />
-				<h:commandButton id="toRegister" action="register" value="注册"  />
+				<a id="toRegister" href="/#{loginAction.gameName}/register.jsf">注册</a>
 			</h:panelGrid>
 		</h:form>
 	</h:body>

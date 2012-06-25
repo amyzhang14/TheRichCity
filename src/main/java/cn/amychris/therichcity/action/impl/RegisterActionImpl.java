@@ -1,38 +1,25 @@
 package cn.amychris.therichcity.action.impl;
 
-import java.util.List;
-
 import cn.amychris.therichcity.action.RegisterAction;
-import cn.amychris.therichcity.form.UserForm;
 import cn.amychris.therichcity.service.UserService;
 import cn.amychris.therichcity.transformer.UserTransformer;
 
-public class RegisterActionImpl implements RegisterAction {
+public class RegisterActionImpl extends BaseActionImpl implements RegisterAction {
 
 	private UserService userService;
-
-	private List<String> errorMsgs;
 	
-	private UserForm userForm = new UserForm();
 	
 	@Override
 	public String register () {
 		
-		userService.register( UserTransformer.transform( userForm ) );
+		userService.register( UserTransformer.transform( this.getUserForm() ) );
 		
-		//ละ”เ
-		return null;
-	}
-	
-	public List<String> getErrorMsgs () {
-		return errorMsgs;
-	}
-
-	public UserForm getUserForm () {
-		return userForm;
+		//
+		return "Register Successfully";
 	}
 
 	public void setUserService ( UserService userService ) {
 		this.userService = userService;
 	}
+	
 }

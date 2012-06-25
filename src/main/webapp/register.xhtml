@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<f:view>
+	<h:head>
+		<title>注册</title>
+	</h:head>
+
+<script type="text/javascript">
+ 	function checkpwd(){
+ 		 var p1=document.userForm.password.value;//获取密码框的值
+  		var p2=document.userForm.confirmPassword.value;//获取重新输入的密码值
+  if(p1==""){
+   alert("请输入密码！");//检测到密码为空，提醒输入//
+   document.userForm.password.focus();//焦点放到密码框
+   return false;//退出检测函数
+  }//如果允许空密码，可取消这个条件
+  
+  if(p1!=p2){//判断两次输入的值是否一致，不一致则显示错误信息
+   document.getElementById("confirmPassword").innerHTML="两次输入密码不一致，请重新输入";//在div显示错误信息
+   document.userForm.password.focus();
+   return false;
+  }else{
+   return true;
+  }
+ }
+</script>
+
+	<h:body>
+		<h:form id="userForm">
+		
+			<c:if test="${ ! empty loginAction.errorMsgs }" >
+				<h:panelGrid columns="1">
+					<c:forEach var="msg" items="${loginAction.errorMsgs}" >
+						<h:outputText value="${msg}" />
+					</c:forEach>
+				</h:panelGrid>
+			</c:if>
+
+			<h:outputLabel value="请注册" />
+
+			<h:panelGrid columns="2">
+
+				<h:outputText value="用户名" />
+				<h:panelGroup>
+					<h:inputText type="text" id="name" value="#{registAction.userForm.name}" required="#{true}" />
+					<h:outputText value="请使用3~20个字符" />
+					<h:message for="email" value="请输入用户名" />
+				</h:panelGroup>
+				
+				<h:outputText value="邮箱地址" />
+				<h:panelGroup>
+					<h:inputText type="text" id="email" value="#{registAction.userForm.email}" required="#{true}" />
+					<h:outputText value="请输入邮箱" />
+					<h:message for="email" value="请输入用户名（邮箱）" />
+				</h:panelGroup>
+
+				<h:outputText value="密码" />
+				<h:panelGroup>
+					<h:inputSecret id="password" value="#{registAction.userForm.password}" required="#{true}" />
+					<f:validateLength   minimum=”6”/> 
+					<h:message for="password" value="请输入密码" />
+				</h:panelGroup>
+
+				<h:outputText value="确认密码" />
+				<h:panelGroup>
+					<h:inputSecret id="confirmPassword" value="#{registAction.userForm.confirmPassword}" required="#{true}" onchange="checkpwd()"/>
+					<h:message for="password" value="请输入与上面一样的密码" />
+					<div id="confirmPassword" style="color:red;"></div>
+				</h:panelGroup>
+				
+				<h:commandButton id="submit" type="submit" action="#{registAction.registe}" value="注册" />
+			</h:panelGrid>
+
+		</h:form>
+	</h:body>
+</f:view>
+</html>

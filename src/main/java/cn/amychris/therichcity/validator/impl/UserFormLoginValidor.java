@@ -16,6 +16,8 @@ public class UserFormLoginValidor implements UserFormValidator {
 	@Override
 	public List<String> validate (UserForm userForm) {
 		List<String> errorMesg = new ArrayList<String>();
+		
+
 
 		// validate the emailAddress
 		if (StringUtil.isBlank(userForm.getEmail())) {

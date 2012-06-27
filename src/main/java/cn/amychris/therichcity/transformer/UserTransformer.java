@@ -7,16 +7,17 @@ import cn.amychris.therichcity.exception.UserTransformingException;
 import cn.amychris.therichcity.form.UserForm;
 
 public class UserTransformer {
-	
-	public static UserEntity transform(UserForm userForm){
+
+	public static UserEntity transform( UserForm userForm ) {
 		UserEntity re = new UserEntity();
-		try {
-			BeanUtils.copyProperties(re, userForm);
-		} catch ( Exception e ) {
-			throw new UserTransformingException(e);
-		}
 		
-		return null;
+		try {
+			BeanUtils.copyProperties( re, userForm );
+		} catch ( Exception e ) {
+			throw new UserTransformingException( e );
+		}
+
+		return re;
 	}
 
 }

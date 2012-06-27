@@ -11,48 +11,40 @@ import cn.amychris.therichcity.transformer.UserTransformer;
 
 public class RegisterActionImpl extends BaseActionImpl implements RegisterAction {
 
-	private UserService userService;
-	
-	
+	private UserService	userService;
+
 	@Override
-	public String register () {
-		
+	public String register() {
+
 		userService.register( UserTransformer.transform( this.getUserForm() ) );
-		
-		//
+
 		return "Register Successfully";
 	}
 
-	public void setUserService ( UserService userService ) {
+	public void setUserService( UserService userService ) {
 		this.userService = userService;
 	}
 
 	@Override
-	public void validateUserNameNotExisting ( FacesContext arg0, UIComponent arg1, Object arg2 ) {
+	public void validateUserNameNotExisting( FacesContext arg0, UIComponent arg1, Object arg2 ) {
 		String name = ( String ) arg2;
-		
-		if ( ! (null == userService.getByName( name ) )) {
-			FacesMessage fm = new FacesMessage( "用户名"+name + "已经存在了" );
-			throw new ValidatorException(fm);
-		
+
+		if ( null != userService.getByName( name ) ) {
+			FacesMessage fm = new FacesMessage( "用户名" + name + "已经存在了" );
+			throw new ValidatorException( fm );
+
+		}
+
 	}
-	
-}
-	
 
 	@Override
-	public void validateEmailNotExisting ( FacesContext arg0, UIComponent arg1, Object arg2 ) {
+	public void validateEmailNotExisting( FacesContext arg0, UIComponent arg1, Object arg2 ) {
 		String email = ( String ) arg2;
-		
-		if ( ! (null == userService.getByEmail( email ) )) {
-			FacesMessage fm = new FacesMessage( "邮箱地址"+email + "已经存在了" );
-			throw new ValidatorException(fm);
-	}
-//		if ( !StringUtil.isEmailAddress( email ) ) {
-//			FacesMessage fm = new FacesMessage( "Email地址" + email + "不是一个合法的Email地址" );
-//			throw new ValidatorException(fm);
-//		}
 
-	
-}
+		if (  null != userService.getByEmail( email )  ) {
+			FacesMessage fm = new FacesMessage( "邮箱地址" + email + "已经存在了" );
+			throw new ValidatorException( fm );
+		}
+		
+	}
 }

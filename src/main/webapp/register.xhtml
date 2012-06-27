@@ -13,10 +13,16 @@
 	<!--
 		function checkpwd() {
 			var p1 = document.userForm.password.value;//获取密码框的值
-			var p2 = document.userForm.confirmPassword.value;//获取重新输入的密码值
+			var p2 = document.confirmPassword.value;//获取重新输入的密码值
 			
 			if (p1 == "") {
 				alert("请输入密码！");//检测到密码为空，提醒输入//
+				document.userForm.password.focus();//焦点放到密码框
+				return false;//退出检测函数
+			}//如果允许空密码，可取消这个条件
+			
+			if (p1.length<6||p1.length>30) {
+				alert("密码长度应在6~30之间");
 				document.userForm.password.focus();//焦点放到密码框
 				return false;//退出检测函数
 			}//如果允许空密码，可取消这个条件
@@ -29,7 +35,7 @@
 				return true;
 			}
 		}
-	//-->
+	-->
 	</script>
 
 	<h:body>
@@ -41,32 +47,27 @@
 
 				<h:outputText value="用户名" />
 				<h:panelGroup>
-					<h:inputText type="text" id="name" value="#{registerAction.userForm.name}" required="#{true}" />
-					<h:outputText value="请使用3~20个字符" />
-					<h:message for="name" value="请输入用户名" />
+					<h:inputText type="text" id="name" value="#{registerAction.userForm.name}" required="#{true}" validator="#{registerAction.validateUserNameNotExisting}" />
+				<!--	<h:outputText value="请使用3~20个字符" />  -->
+				<h:message for="name" styleClass="error" />
 				</h:panelGroup>
 
 				<h:outputText value="邮箱地址" />
 				<h:panelGroup>
-					<h:inputText type="text" id="email" value="#{registerAction.userForm.email}" required="#{true}" >
-						<f:validator validatorId="EmailFormatValidator" />
+					<h:inputText type="text" id="email" value="#{registerAction.userForm.email}" required="#{true}" validator="#{registerAction.validateEmailNotExisting}" >
+					<f:validator validatorId="EmailFormatValidator" />
 					</h:inputText>
-					<!-- <h:outputText value="请输入邮箱" />
-					<h:message for="email" value="请输入用户名（邮箱）" /> -->
+					<h:message for="email" styleClass="error" />
 				</h:panelGroup>
 
 				<h:outputText value="密码" />
 				<h:panelGroup>
-					<h:inputSecret id="password" value="#{registerAction.userForm.password}" required="#{true}" />
-					<f:validateLength minimum="6" />
-					<h:message for="password" value="请输入密码" />
+					<h:inputSecret id="password" value="#{registerAction.userForm.password}" required="#{true}" redisplay=true />
 				</h:panelGroup>
 
 				<h:outputText value="确认密码" />
 				<h:panelGroup>
 					<h:inputSecret id="confirmPassword" value="#{registerAction.userForm.confirmPassword}" required="#{true}" onblur="checkpwd()" />
-					<h:message for="password" value="请输入与上面一样的密码" />
-					
 				</h:panelGroup>
 
 				<h:commandButton id="submit" type="submit" action="#{registerAction.register}" value="注册" />

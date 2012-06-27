@@ -10,6 +10,5 @@
 		<validator-id>EmailFormatValidator</validator-id>
 		<validator-class>cn.amychris.therichcity.validator.EmailFormatValidator</validator-class>
 	</validator>
-	
 
 </faces-config>

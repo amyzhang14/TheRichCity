@@ -8,6 +8,8 @@ public interface UserDao {
 	
 	
 	UserEntity getByEmail(String email);
+	
+	UserEntity getByName(String name);
 
 	Long insert(UserEntity user);
 

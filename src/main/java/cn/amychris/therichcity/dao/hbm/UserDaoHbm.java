@@ -19,65 +19,79 @@ import cn.amychris.therichcity.entity.UserEntity;
  * Implementation of <code>UserDao</code>, using Hibernate framework.
  */
 
-@Scope("singleton")
-@Repository("userDao")
+@Scope ( "singleton" )
+@Repository ( "userDao" )
 public class UserDaoHbm implements UserDao {
 
-	@Resource(name = "hibernateTemplate")
+	@Resource ( name = "hibernateTemplate" )
 	private HibernateTemplate hibernateTemplate;
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings ( "unchecked" )
 	@Override
-	public UserEntity getByEmail(String email) {
+	public UserEntity getByEmail ( String email ) {
 
-		if (null == email) {
-			throw new NullPointerException("email cann't be null.");
+		if ( null == email ) {
+			throw new NullPointerException( "email cann't be null." );
 		}
 
 		UserEntity user = new UserEntity();
-		user.setEmail(email);
-		List<UserEntity> list = (List<UserEntity>) this.hibernateTemplate.findByExample(user);
+		user.setEmail( email );
+		List<UserEntity> list = (List<UserEntity>) this.hibernateTemplate.findByExample( user );
 
-		return list.isEmpty() ? null : list.get(0);
+		return list.isEmpty() ? null : list.get( 0 );
 	}
 
 	@Override
-	public Long insert(UserEntity user) {
-		if (null == user.getEmail() || null == user.getName() || null == user.getPassword()) {
-			throw new NullPointerException("email and name and password cann't be null.");
+	public Long insert ( UserEntity user ) {
+		if ( null == user.getEmail() || null == user.getName() || null == user.getPassword() ) {
+			throw new NullPointerException( "email and name and password cann't be null." );
 		}
 
-		user.setUuid(null);
-		user.setRegisterDate(new Date());
-		return (Long) this.hibernateTemplate.save(user);
+		user.setUuid( null );
+		user.setRegisterDate( new Date() );
+		return (Long) this.hibernateTemplate.save( user );
 	}
 
 	@Override
-	public void delete(List<Long> uuids) {
-		if (null == uuids) {
-			throw new NullPointerException("Uuids couldn't be null.");
+	public void delete ( List<Long> uuids ) {
+		if ( null == uuids ) {
+			throw new NullPointerException( "Uuids couldn't be null." );
 		}
 
-		if (uuids.isEmpty()) {
+		if ( uuids.isEmpty() ) {
 			return;
 		}
 
 		List<UserEntity> entities = new ArrayList<UserEntity>();
 
-		for (Long uuid : uuids) {
+		for ( Long uuid : uuids ) {
 			UserEntity user = new UserEntity();
-			user.setUuid(uuid);
-			entities.add(user);
+			user.setUuid( uuid );
+			entities.add( user );
 		}
 
-		this.hibernateTemplate.deleteAll(entities);
+		this.hibernateTemplate.deleteAll( entities );
 	}
 
 	@Override
-	public void update(UserEntity user) {
-		user.setLastUpdateTime(null);
-		user.setRegisterDate(null);
-		this.hibernateTemplate.update(user);
+	public void update ( UserEntity user ) {
+		user.setLastUpdateTime( null );
+		user.setRegisterDate( null );
+		this.hibernateTemplate.update( user );
+	}
+
+	@Override
+	public UserEntity getByName ( String name ) {
+		if ( null == name ) {
+			throw new NullPointerException( "name cann't be null." );
+		}
+
+		UserEntity user = new UserEntity();
+		user.setName( name );
+		@SuppressWarnings ( "unchecked" )
+		List<UserEntity> list = (List<UserEntity>) this.hibernateTemplate.findByExample( user );
+
+		return list.isEmpty() ? null : list.get( 0 );
 	}
 
 }

@@ -6,12 +6,14 @@ import cn.amychris.therichcity.entity.UserEntity;
 
 public interface UserService {
 
-	UserEntity register(UserEntity user);
-	
-	UserEntity getByEmail(String email);
-	
-	UserEntity updateUser(UserEntity user);
-	
-	void removeUsers(List<UserEntity> users);
-	
+	UserEntity register ( UserEntity user );
+
+	UserEntity getByEmail ( String email );
+
+	UserEntity updateUser ( UserEntity user );
+
+	void removeUsers ( List<UserEntity> users );
+
+	UserEntity getByName ( String name );
+
 }

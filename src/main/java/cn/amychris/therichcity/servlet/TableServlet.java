@@ -3,15 +3,17 @@ package cn.amychris.therichcity.servlet;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.context.WebApplicationContext;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
-import cn.amychris.therichcity.servlet.command.Command;
+import cn.amychris.therichcity.command.Command;
 
-public class TableServlet extends HttpServlet {
+public class TableServlet extends BaseHttpServlet {
+	
+	private static final transient Log log = LogFactory.getLog( TableServlet.class );
 
 	/**
 	 * 
@@ -20,14 +22,31 @@ public class TableServlet extends HttpServlet {
 
 	@Override
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-		WebApplicationContext ctx = ( WebApplicationContext ) request.getSession().getServletContext()
-				.getAttribute( "org.springframework.web.context.WebApplicationContext.ROOT" );
+		if ( log.isDebugEnabled() ) {
+			log.debug( "Enter doGet()..." );
+			log.debug( "Request: " + request );
+		}
 		
 		String commandName = request.getParameter( "command" );
-		Command command = (Command)ctx.getBean( commandName );
-		String commandPara = request.getParameter( "para" );
 		
+		if ( null == commandName ) {
+			response.sendError( HttpServletResponse.SC_BAD_REQUEST, "Parameter \"command\" is required." );
+			return;
+		}
+		
+		Command command = this.getCommandFactory().getCommand( commandName );
+
+		if ( null == command ) {
+			response.sendError( HttpServletResponse.SC_BAD_REQUEST, "Bad Command: " + commandName );
+			return;
+		}
+
+		String commandPara = request.getParameter( "para" );
 		response.getWriter().print( command.execute( commandPara ) );
+		
+		if ( log.isDebugEnabled() ) {
+			log.debug( "Return Response: " + response );
+		}
 	}
 
 	@Override

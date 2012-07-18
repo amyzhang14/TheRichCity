@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
 
 import cn.amychris.therichcity.entity.UserEntity;
 import cn.amychris.therichcity.game.Table;
-import cn.amychris.therichcity.service.GameService;
+import cn.amychris.therichcity.service.TableService;
 
 @Scope("singleton")
-@Service("gameService")
-public class GameServiceImpl implements GameService {
+@Service("tableService")
+public class TableServiceImpl implements TableService {
 	
 	private Map<Integer, Table> tables = new HashMap<Integer, Table>();
 

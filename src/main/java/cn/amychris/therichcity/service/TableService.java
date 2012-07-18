@@ -6,7 +6,7 @@ import java.util.Set;
 import cn.amychris.therichcity.entity.UserEntity;
 import cn.amychris.therichcity.game.Table;
 
-public interface GameService {
+public interface TableService {
 
 	Set<Table> getAllTables();
 	

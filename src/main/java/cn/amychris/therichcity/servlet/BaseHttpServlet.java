@@ -15,7 +15,7 @@ public abstract class BaseHttpServlet extends HttpServlet {
 	}
 
 	protected CommandFactory getCommandFactory() {
-		return ( CommandFactory ) this.getWebApplicationContext().getBean( "commandFactory" );
+		return ( CommandFactory ) this.getWebApplicationContext().getBean( "commandsFactory" );
 	}
 
 }

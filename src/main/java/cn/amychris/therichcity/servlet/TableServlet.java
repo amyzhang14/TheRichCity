@@ -8,17 +8,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.util.StringUtils;
 
 import cn.amychris.therichcity.command.Command;
 
 public class TableServlet extends BaseHttpServlet {
-	
-	private static final transient Log log = LogFactory.getLog( TableServlet.class );
+
+	private static final transient Log	log					= LogFactory.getLog( TableServlet.class );
 
 	/**
 	 * 
 	 */
-	private static final long	serialVersionUID	= 1L;
+	private static final long			serialVersionUID	= 1L;
 
 	@Override
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
@@ -26,14 +27,14 @@ public class TableServlet extends BaseHttpServlet {
 			log.debug( "Enter doGet()..." );
 			log.debug( "Request: " + request );
 		}
-		
+
 		String commandName = request.getParameter( "command" );
-		
+
 		if ( null == commandName ) {
 			response.sendError( HttpServletResponse.SC_BAD_REQUEST, "Parameter \"command\" is required." );
 			return;
 		}
-		
+
 		Command command = this.getCommandFactory().getCommand( commandName );
 
 		if ( null == command ) {
@@ -42,11 +43,9 @@ public class TableServlet extends BaseHttpServlet {
 		}
 
 		String commandPara = request.getParameter( "para" );
-		response.getWriter().print( command.execute( commandPara ) );
+		response.setContentType( "text/plain;charset=GB2312" );
+		response.getWriter().print( StringUtils.hasLength( commandPara ) ? command.execute( commandPara ) : command.execute() );
 		
-		if ( log.isDebugEnabled() ) {
-			log.debug( "Return Response: " + response );
-		}
 	}
 
 	@Override

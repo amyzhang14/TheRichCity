@@ -21,7 +21,7 @@ public class GetAllTables implements Command {
 
 	@Override
 	public String execute( Object arg ) {
-		throw new UnsupportedOperationException( "There is no command needed for GetAllTables." );
+		throw new UnsupportedOperationException( "There is no parameter needed for GetAllTables." );
 	}
 
 	@Override

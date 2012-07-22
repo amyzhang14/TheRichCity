@@ -20,10 +20,10 @@ public class Table implements Cloneable, Comparable<Table> {
 	// All users sitting around this table.
 	private Set<UserEntity>	users;
 
-	private boolean				gameStarted;
+	private boolean				gameStarted = false;
 
 	// The maximum number of users(players) can sit around this table.
-	private int					maxPlayers;
+	private int					maxPlayers = 6;
 
 	// Who created this table.
 	private UserEntity			tableMaster;
@@ -68,6 +68,7 @@ public class Table implements Cloneable, Comparable<Table> {
 		this.tableMaster = tableMaster;
 	}
 
+	@Override
 	public Object clone() {
 		Table copy = new Table();
 

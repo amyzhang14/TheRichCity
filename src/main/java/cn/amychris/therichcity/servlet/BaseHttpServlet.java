@@ -14,8 +14,12 @@ public abstract class BaseHttpServlet extends HttpServlet {
 		return ( WebApplicationContext ) this.getServletContext().getAttribute( "org.springframework.web.context.WebApplicationContext.ROOT" );
 	}
 
-	protected CommandFactory getCommandFactory() {
-		return ( CommandFactory ) this.getWebApplicationContext().getBean( "commandsFactory" );
+	protected CommandFactory getGetCommandFactory() {
+		return ( CommandFactory ) this.getWebApplicationContext().getBean( "getCommandsFactory" );
+	}
+	
+	protected CommandFactory getPostCommandFactory() {
+		return ( CommandFactory ) this.getWebApplicationContext().getBean( "postCommandsFactory" );
 	}
 
 }

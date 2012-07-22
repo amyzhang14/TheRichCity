@@ -61,14 +61,14 @@
 	</servlet>
 
 	<servlet>
-		<servlet-name>Table Servlet</servlet-name>
-		<servlet-class>cn.amychris.therichcity.servlet.TableServlet</servlet-class>
+		<servlet-name>Execute Command Servlet</servlet-name>
+		<servlet-class>cn.amychris.therichcity.servlet.ExecuteCommandServlet</servlet-class>
 		<load-on-startup>0</load-on-startup>
 	</servlet>
 	
 	<servlet-mapping>
-		<servlet-name>Table Servlet</servlet-name>
-		<url-pattern>/table</url-pattern>
+		<servlet-name>Execute Command Servlet</servlet-name>
+		<url-pattern>/execute</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>

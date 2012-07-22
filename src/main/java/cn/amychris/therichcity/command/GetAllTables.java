@@ -5,6 +5,7 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import cn.amychris.therichcity.exception.CommandExecutingException;
 import cn.amychris.therichcity.game.Table;
 import cn.amychris.therichcity.service.TableService;
 
@@ -21,7 +22,7 @@ public class GetAllTables implements Command {
 
 	@Override
 	public String execute( Object arg ) {
-		throw new UnsupportedOperationException( "There is no parameter needed for GetAllTables." );
+		throw new CommandExecutingException( "There is no parameter needed for GetAllTables." );
 	}
 
 	@Override

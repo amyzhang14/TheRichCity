@@ -1,8 +1,10 @@
 package cn.amychris.therichcity.command;
 
+import cn.amychris.therichcity.exception.CommandExecutingException;
+
 public interface Command {
 
-	String execute( Object arg );
+	String execute( Object arg ) throws CommandExecutingException;
 	
-	String execute();
+	String execute() throws CommandExecutingException;
 }

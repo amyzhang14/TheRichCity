@@ -7,28 +7,17 @@
 <head>
 
 <title>富饶之国 - 游戏大厅</title>
-
+<script type="text/javascript" src="/#{registerAction.gameName}/js/jquery.min.js" />
 <script type="text/javascript">
 <!--
-	var getAllTablesReq = new XMLHttpRequest();
-
-	function getAllTables() {
-		// If getting all tables successfully
-		if (4 == getAllTablesReq.readyState) {
-			return eval(getAllTablesReq.responseText);
-		}
-
-		return null;
-	};
-
-	function renderTables() {
-		var tables = getAllTables();
-
-		if ( ! tables) {
+	function renderTables(tables) {
+		//var tables = getAllTables();
+		
+		if (!tables) {
 			return;
 		}
 
-		var gameHall = document.getElementById('gameHall');
+		var gameHall = $("#gameHall")[0];
 
 		if (!gameHall) {
 			alert("Element gameHall is not found !");
@@ -53,10 +42,9 @@
 	};
 
 	setInterval(function() {
-		getAllTablesReq.open("GET",
-				"/#{baseAction.gameName}/execute?command=getAllTables", true);
-		getAllTablesReq.onreadystatechange = renderTables;
-		getAllTablesReq.send(null);
+		$.getJSON("/#{baseAction.gameName}/execute", {
+			"command" : "getAllTables"
+		}, renderTables)
 
 	}, 5000);
 //-->

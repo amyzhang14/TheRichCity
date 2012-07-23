@@ -9,39 +9,41 @@
 		<title>注册</title>
 	</h:head>
 
-	<script type="text/javascript">
-	<!--
+	<script type="text/javascript" src="/#{registerAction.gameName}/js/jquery.min.js" />
+	<script type="text/javascript"><!--
 	
-		function checkpwd() {
-			var p1 = document.getElementById("userForm:password");
-			var p2 = document.getElementById("confirmPassword");
-			
-			if (null == p1 || p1.value.length == 0) {
-				alert("请输入密码！");
-				p1.focus();
-				return false;
-			}
-			
-			if (p1.value.length<6||p1.value.length>30) {
-				alert("密码长度应在6~30之间");
-				p1.focus();
-				return false;
-			}
+		$(document).ready(function() {
+			$("#userForm").submit(function(){
+				var p1 = $("#userForm\\:password")[0];
+				var p2 = $("#confirmPassword")[0];
+				
+				if (null == p1 || p1.value.length == 0) {
+					alert("请输入密码！");
+					p1.focus();
+					return false;
+				}
+				
+				if ( p1.value.length < 6 || p1.value.length > 30 ) {
+					alert("密码长度应在6~30位之间");
+					p1.focus();
+					return false;
+				}
 
-			if (p1.value != p2.value) {
-				document.getElementById("passwordNotSameMessage").style.display="";
-				p1.focus();
-				return false;
-			} else {
-				document.getElementById("passwordNotSameMessage").style.display="none";
-				return true;
-			}
-		}
-	-->
+				if ( p1.value != p2.value ) {
+					$("#passwordNotSameMessage")[0].style.display="";
+					p1.focus();
+					return false;
+				} else {
+					$("#passwordNotSameMessage")[0].style.display="none";
+					return true;
+				}
+			});
+		});
+	//-->
 	</script>
 
 	<h:body>
-		<h:form id="userForm" onsubmit="return checkpwd();">
+		<h:form id="userForm">
 
 			<h:outputLabel value="请注册" />
 

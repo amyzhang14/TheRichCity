@@ -4,6 +4,8 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.google.gson.Gson;
+
 public class StringUtil {
 
 	public static final int UUID_LENGTH = 32;
@@ -57,6 +59,11 @@ public class StringUtil {
 		}
 
 		return true;
+	}
+	
+	public static String toJSONString ( Object o ) {
+		Gson gson = new Gson();
+		return gson.toJson( o );
 	}
 
 }

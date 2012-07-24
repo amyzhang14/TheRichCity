@@ -3,12 +3,9 @@ package cn.amychris.therichcity.action.impl;
 import cn.amychris.therichcity.action.LoginAction;
 import cn.amychris.therichcity.entity.UserEntity;
 import cn.amychris.therichcity.form.UserForm;
-import cn.amychris.therichcity.service.LoginService;
 import cn.amychris.therichcity.service.UserService;
 
 public class LoginActionImpl extends BaseActionImpl implements LoginAction {
-
-	private LoginService loginService;
 
 	private UserService userService;
 
@@ -17,8 +14,8 @@ public class LoginActionImpl extends BaseActionImpl implements LoginAction {
 	@Override
 	public String login () {
 
-		UserEntity user = userService.getByEmail( userForm.getEmail() );
-		loginService.login( user );
+		UserEntity user = userService.getUserByEmail( userForm.getEmail() );
+		userService.login( user );
 		return "Login Successfully";
 	}
 
@@ -26,8 +23,8 @@ public class LoginActionImpl extends BaseActionImpl implements LoginAction {
 		return userForm;
 	}
 
-	public void setLoginService ( LoginService loginService ) {
-		this.loginService = loginService;
+	public void setLoginService ( UserService userService ) {
+		this.userService = userService;
 	}
 
 	public void setUserService ( UserService userService ) {

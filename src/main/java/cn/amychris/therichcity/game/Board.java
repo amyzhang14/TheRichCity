@@ -13,9 +13,9 @@ import cn.amychris.therichcity.entity.UserEntity;
  *         game.
  * 
  */
-public class Table implements Cloneable, Comparable<Table> {
+public class Board implements Cloneable, Comparable<Board> {
 
-	private int					tableNumber;
+	private int					boardNumber;
 
 	// All users sitting around this table.
 	private Set<UserEntity>	users;
@@ -26,7 +26,7 @@ public class Table implements Cloneable, Comparable<Table> {
 	private int					maxPlayers = 6;
 
 	// Who created this table.
-	private UserEntity			tableMaster;
+	private UserEntity			boardCreator;
 
 	public Set<UserEntity> getUsers() {
 		return users;
@@ -44,12 +44,12 @@ public class Table implements Cloneable, Comparable<Table> {
 		this.gameStarted = started;
 	}
 
-	public int getTableNumber() {
-		return tableNumber;
+	public int getBoardNumber() {
+		return boardNumber;
 	}
 
-	public void setTableNumber( int tableNumber ) {
-		this.tableNumber = tableNumber;
+	public void setBoardNumber( int tableNumber ) {
+		this.boardNumber = tableNumber;
 	}
 
 	public int getMaxPlayers() {
@@ -60,19 +60,19 @@ public class Table implements Cloneable, Comparable<Table> {
 		this.maxPlayers = maxPlayers;
 	}
 
-	public UserEntity getTableMaster() {
-		return tableMaster;
+	public UserEntity getBoardCreator() {
+		return boardCreator;
 	}
 
-	public void setTableMaster( UserEntity tableMaster ) {
-		this.tableMaster = tableMaster;
+	public void setBoardCreator( UserEntity tableMaster ) {
+		this.boardCreator = tableMaster;
 	}
 
 	@Override
 	public Object clone() {
-		Table copy = new Table();
+		Board copy = new Board();
 
-		copy.tableNumber = this.tableNumber;
+		copy.boardNumber = this.boardNumber;
 		copy.maxPlayers = this.maxPlayers;
 		copy.gameStarted = this.gameStarted;
 
@@ -85,23 +85,23 @@ public class Table implements Cloneable, Comparable<Table> {
 
 	@Override
 	public boolean equals( Object o ) {
-		if ( null == o || ! (o instanceof Table) ) {
+		if ( null == o || ! (o instanceof Board) ) {
 			return false;
 		}
 
-		Table t = ( Table ) o;
+		Board t = ( Board ) o;
 
-		return this.tableNumber == t.tableNumber;
+		return this.boardNumber == t.boardNumber;
 	}
 
 	@Override
 	public int hashCode() {
-		return this.tableNumber;
+		return this.boardNumber;
 	}
 
 	@Override
-	public int compareTo( Table o ) {
-		return this.tableNumber - o.tableNumber;
+	public int compareTo( Board o ) {
+		return this.boardNumber - o.boardNumber;
 	}
 
 }

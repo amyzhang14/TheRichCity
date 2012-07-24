@@ -29,7 +29,7 @@ public class RegisterActionImpl extends BaseActionImpl implements RegisterAction
 	public void validateUserNameNotExisting( FacesContext arg0, UIComponent arg1, Object arg2 ) {
 		String name = ( String ) arg2;
 
-		if ( null != userService.getByName( name ) ) {
+		if ( null != userService.getUserByName( name ) ) {
 			FacesMessage fm = new FacesMessage( "用户名" + name + "已经存在了" );
 			throw new ValidatorException( fm );
 
@@ -41,7 +41,7 @@ public class RegisterActionImpl extends BaseActionImpl implements RegisterAction
 	public void validateEmailNotExisting( FacesContext arg0, UIComponent arg1, Object arg2 ) {
 		String email = ( String ) arg2;
 
-		if (  null != userService.getByEmail( email )  ) {
+		if (  null != userService.getUserByEmail( email )  ) {
 			FacesMessage fm = new FacesMessage( "邮箱地址" + email + "已经存在了" );
 			throw new ValidatorException( fm );
 		}

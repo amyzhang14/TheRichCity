@@ -1,6 +1,7 @@
 package cn.amychris.therichcity.service.impl;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -12,27 +13,32 @@ import org.springframework.stereotype.Service;
 
 import cn.amychris.therichcity.dao.UserDao;
 import cn.amychris.therichcity.entity.UserEntity;
-import cn.amychris.therichcity.exception.IllegalUserEntityException;
+import cn.amychris.therichcity.exception.ExceedingMaxLoginUsersException;
+import cn.amychris.therichcity.exception.SecurityServiceException;
 import cn.amychris.therichcity.exception.UserNotfoundException;
 import cn.amychris.therichcity.service.UserService;
-import cn.amychris.therichcity.validator.UserValidator;
 
-@Scope ( "singleton" )
-@Service ( "userServiceImpl" )
+@Scope("singleton")
+@Service("userServiceImpl")
 public class UserServiceImpl implements UserService {
-	private static final transient Log log = LogFactory.getLog( UserServiceImpl.class );
+	private static final transient Log	log	= LogFactory.getLog( UserServiceImpl.class );
 
-	@Resource ( name = "userDao" )
-	private UserDao userDao;
+	private List<UserEntity>			loginUser;
 
-	@Resource ( name = "userValidator" )
-	private UserValidator userValidator;
+	private int							maxLoginUsers;
+
+	@Resource(name = "userDao")
+	private UserDao						userDao;
+
+	public UserServiceImpl(int maxLoginUsers) {
+		this.maxLoginUsers = maxLoginUsers;
+		loginUser = new LinkedList<UserEntity>();
+	}
 
 	@Override
-	public UserEntity register ( UserEntity user ) {
+	public UserEntity register( UserEntity user ) {
 		log.debug( "Enter register(user[" + user + "])..." );
 
-		validateUser( user );
 		userDao.insert( user );
 		UserEntity result = userDao.getByEmail( user.getEmail() );
 		log.debug( "Registered user[" + result + "] successfully." );
@@ -41,7 +47,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserEntity getByEmail ( String email ) {
+	public UserEntity getUserByEmail( String email ) {
 		log.debug( "Enter getByEmail(user[" + email + "])..." );
 		UserEntity re = userDao.getByEmail( email );
 		log.debug( "Got user[" + re + "] successfully." );
@@ -49,9 +55,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserEntity updateUser ( UserEntity user ) {
+	public UserEntity updateUser( UserEntity user ) {
 		log.debug( "Enter updateUser(user[" + user + "])..." );
-		validateUser( user );
 
 		if ( null == userDao.getByEmail( user.getEmail() ) ) {
 			throw new UserNotfoundException( user + "not found" );
@@ -62,7 +67,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void removeUsers ( List<UserEntity> users ) {
+	public void removeUsers( List<UserEntity> users ) {
 		log.debug( "Enter removeUsers()..." );
 		if ( null == users ) {
 			throw new NullPointerException( "userList is null" );
@@ -82,24 +87,56 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
-	private void validateUser ( UserEntity user ) {
-		if ( null == user ) {
-			throw new NullPointerException( "user is null" );
-		}
-
-		List<String> validateResult = userValidator.validate( user );
-
-		if ( !validateResult.isEmpty() ) {
-			throw new IllegalUserEntityException( validateResult );
-		}
-	}
-
 	@Override
-	public UserEntity getByName ( String name ) {
+	public UserEntity getUserByName( String name ) {
 		log.debug( "Enter getByName(user[" + name + "])..." );
 		UserEntity re = userDao.getByName( name );
 		log.debug( "Got user[" + re + "] successfully." );
 		return re;
+	}
+
+	@Override
+	public void login( UserEntity user ) {
+		if ( null == user ) {
+			throw new NullPointerException( "User could not be null." );
+		}
+
+		if ( loginUser.contains( user ) ) {
+			throw new SecurityServiceException( "User(" + user.toString() + ") has already logined." );
+		}
+
+		synchronized ( loginUser ) {
+			if ( loginUser.size() == maxLoginUsers ) {
+				throw new ExceedingMaxLoginUsersException( "The maximum number of users can login is " + maxLoginUsers );
+			}
+
+			loginUser.add( user );
+		}
+	}
+
+	@Override
+	public void logout( UserEntity user ) {
+		if ( null == user ) {
+			throw new NullPointerException( "User could not be null." );
+		}
+
+		if ( !loginUser.contains( user ) ) {
+			throw new SecurityServiceException( "User(" + user.toString() + ") hasn't logined." );
+		}
+
+		loginUser.remove( user );
+
+	}
+
+	@Override
+	public int sizeOfLoginedUsers() {
+		return loginUser.size();
+	}
+
+	@Override
+	public boolean isUserLogined( UserEntity user ) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

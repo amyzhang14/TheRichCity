@@ -19,7 +19,7 @@
 		</constructor-arg>
 	</bean>
 
-	<bean id="getAllTables" class="cn.amychris.therichcity.command.GetAllTables">
+	<bean id="getAllTables" class="cn.amychris.therichcity.command.GetAllBoards">
 		<constructor-arg ref="tableService" />
 	</bean>
 	

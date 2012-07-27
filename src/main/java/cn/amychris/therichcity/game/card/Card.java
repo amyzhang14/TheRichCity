@@ -1,4 +1,5 @@
-package cn.amychris.therichcity.game;
+package cn.amychris.therichcity.game.card;
+
 
 public interface Card {
 

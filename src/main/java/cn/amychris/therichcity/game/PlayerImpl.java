@@ -3,35 +3,34 @@ package cn.amychris.therichcity.game;
 import java.util.List;
 
 import cn.amychris.therichcity.entity.User;
-import cn.amychris.therichcity.game.constructure.Constructure;
-import cn.amychris.therichcity.game.role.Role;
-import cn.amychris.therichcity.util.ArrayUtil;
+import cn.amychris.therichcity.game.card.ConstructureCard;
+import cn.amychris.therichcity.game.card.RoleCard;
 
 public class PlayerImpl implements Player {
-	
+
 	private Game game;
-	
+
 	private User user;
-	
-	private Role role;
+
+	private RoleCard role;
 
 	private int money = 0;
 
 	private boolean isManagedByServer = false;
 
-	private List<Constructure> constructures;
-	
+	private List<ConstructureCard> constructureCards;
+
 	public PlayerImpl(User user, Game game) {
-		if ( null == user || null == game ) {
+		if (null == user || null == game) {
 			throw new NullPointerException("Neither user nor game could be null.");
 		}
-		
+
 		this.user = user;
 		this.game = game;
 	}
 
 	@Override
-	public Role getRole() {
+	public RoleCard getRole() {
 		return this.role;
 	}
 
@@ -46,32 +45,38 @@ public class PlayerImpl implements Player {
 	}
 
 	@Override
-	public List<Constructure> getConstructures() {
-		return this.constructures;
+	public List<ConstructureCard> getConstructures() {
+		return this.constructureCards;
 	}
 
 	@Override
 	public void acquireMoney() {
-		this.money += 2;
+		this.role.doAcquireMoney();
 	}
 
 	@Override
 	public void acquireConstucture() {
-		Constructure[] selectables = this.game.getTop2Constructures();
-		
-		if ( ArrayUtil.isBlank(selectables) ) {
-			// TODO I don't know what to do in this case at the moment.
-			return;
-		}
-		
-		
-		
+		this.role.doAcquireConstucture();
 	}
 
 	@Override
-	public void buildConstructure(Constructure constructure) {
-		// TODO Auto-generated method stub
+	public void buildConstructure(ConstructureCard constructureCard) {
+		this.role.buildConstructure(constructureCard);
+	}
 
+	@Override
+	public boolean isKilled() {
+		return this.role.isKilled();
+	}
+
+	@Override
+	public boolean isMoneyStolen() {
+		return this.role.isMoneyStolen();
+	}
+
+	@Override
+	public boolean isNowMyTurn() {
+		return this.role.isNowMyTurn();
 	}
 
 	@Override
@@ -79,4 +84,8 @@ public class PlayerImpl implements Player {
 		return this.user;
 	}
 
+	@Override
+	public void setRole(RoleCard role) {
+		this.role = role;
+	}
 }

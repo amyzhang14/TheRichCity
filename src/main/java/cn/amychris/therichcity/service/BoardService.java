@@ -2,8 +2,8 @@ package cn.amychris.therichcity.service;
 
 import java.util.List;
 
-import cn.amychris.therichcity.entity.UserEntity;
-import cn.amychris.therichcity.game.Board;
+import cn.amychris.therichcity.entity.Board;
+import cn.amychris.therichcity.entity.User;
 
 public interface BoardService {
 	
@@ -13,12 +13,12 @@ public interface BoardService {
 	
 	Board getBoard(int boardNumber);
 	
-	Board createBoard(UserEntity boardCreator);
+	Board createBoard(User boardCreator);
 	
-	void joinBoard(int boardNumber, UserEntity user);
+	void joinBoard(int boardNumber, User user);
 	
-	void startGame(int boardNumber, UserEntity boardCreator);
+	void startGame(int boardNumber, User boardCreator);
 	
-	void quitBoard(UserEntity user);
+	void quitBoard(User user);
 	
 }

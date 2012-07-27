@@ -2,7 +2,7 @@ package cn.amychris.therichcity.game;
 
 import java.util.List;
 
-import cn.amychris.therichcity.entity.UserEntity;
+import cn.amychris.therichcity.entity.User;
 import cn.amychris.therichcity.game.constructure.Constructure;
 import cn.amychris.therichcity.game.role.Role;
 import cn.amychris.therichcity.util.ArrayUtil;
@@ -11,7 +11,7 @@ public class PlayerImpl implements Player {
 	
 	private Game game;
 	
-	private UserEntity user;
+	private User user;
 	
 	private Role role;
 
@@ -21,7 +21,7 @@ public class PlayerImpl implements Player {
 
 	private List<Constructure> constructures;
 	
-	public PlayerImpl(UserEntity user, Game game) {
+	public PlayerImpl(User user, Game game) {
 		if ( null == user || null == game ) {
 			throw new NullPointerException("Neither user nor game could be null.");
 		}
@@ -75,7 +75,7 @@ public class PlayerImpl implements Player {
 	}
 
 	@Override
-	public UserEntity getUser() {
+	public User getUser() {
 		return this.user;
 	}
 

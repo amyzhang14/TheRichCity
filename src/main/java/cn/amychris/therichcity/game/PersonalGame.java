@@ -2,7 +2,7 @@ package cn.amychris.therichcity.game;
 
 import java.util.List;
 
-import cn.amychris.therichcity.entity.UserEntity;
+import cn.amychris.therichcity.entity.User;
 import cn.amychris.therichcity.exception.IllegalOperationException;
 import cn.amychris.therichcity.game.constructure.Constructure;
 import cn.amychris.therichcity.game.role.Role;
@@ -17,7 +17,7 @@ public class PersonalGame implements Game {
 
 	private List<Role> selectedRoles;
 
-	public PersonalGame(List<UserEntity> users, List<Constructure> constructures, List<Role> availableRoles) {
+	public PersonalGame(List<User> users, List<Constructure> constructures, List<Role> availableRoles) {
 		this.constructures = constructures;
 		this.availableRoles = availableRoles;
 	}

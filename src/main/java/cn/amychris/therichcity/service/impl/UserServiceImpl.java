@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import cn.amychris.therichcity.dao.UserDao;
-import cn.amychris.therichcity.entity.UserEntity;
+import cn.amychris.therichcity.entity.User;
 import cn.amychris.therichcity.exception.ExceedingMaxLoginUsersException;
 import cn.amychris.therichcity.exception.SecurityServiceException;
 import cn.amychris.therichcity.exception.UserNotfoundException;
@@ -23,7 +23,7 @@ import cn.amychris.therichcity.service.UserService;
 public class UserServiceImpl implements UserService {
 	private static final transient Log	log	= LogFactory.getLog( UserServiceImpl.class );
 
-	private List<UserEntity>			loginUser;
+	private List<User>			loginUser;
 
 	private int							maxLoginUsers;
 
@@ -32,30 +32,30 @@ public class UserServiceImpl implements UserService {
 
 	public UserServiceImpl(int maxLoginUsers) {
 		this.maxLoginUsers = maxLoginUsers;
-		loginUser = new LinkedList<UserEntity>();
+		loginUser = new LinkedList<User>();
 	}
 
 	@Override
-	public UserEntity register( UserEntity user ) {
+	public User register( User user ) {
 		log.debug( "Enter register(user[" + user + "])..." );
 
 		userDao.insert( user );
-		UserEntity result = userDao.getByEmail( user.getEmail() );
+		User result = userDao.getByEmail( user.getEmail() );
 		log.debug( "Registered user[" + result + "] successfully." );
 
 		return result;
 	}
 
 	@Override
-	public UserEntity getUserByEmail( String email ) {
+	public User getUserByEmail( String email ) {
 		log.debug( "Enter getByEmail(user[" + email + "])..." );
-		UserEntity re = userDao.getByEmail( email );
+		User re = userDao.getByEmail( email );
 		log.debug( "Got user[" + re + "] successfully." );
 		return re;
 	}
 
 	@Override
-	public UserEntity updateUser( UserEntity user ) {
+	public User updateUser( User user ) {
 		log.debug( "Enter updateUser(user[" + user + "])..." );
 
 		if ( null == userDao.getByEmail( user.getEmail() ) ) {
@@ -67,36 +67,36 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void removeUsers( List<UserEntity> users ) {
+	public void removeUsers( List<User> users ) {
 		log.debug( "Enter removeUsers()..." );
 		if ( null == users ) {
 			throw new NullPointerException( "userList is null" );
 		}
 
 		List<Long> uuidList = new ArrayList<Long>();
-		for ( UserEntity user : users ) {
+		for ( User user : users ) {
 			uuidList.add( user.getUuid() );
 		}
 
 		userDao.delete( uuidList );
 
 		if ( log.isDebugEnabled() ) {
-			for ( UserEntity user : users ) {
+			for ( User user : users ) {
 				log.debug( "Removed user[" + user + "] successfully." );
 			}
 		}
 	}
 
 	@Override
-	public UserEntity getUserByName( String name ) {
+	public User getUserByName( String name ) {
 		log.debug( "Enter getByName(user[" + name + "])..." );
-		UserEntity re = userDao.getByName( name );
+		User re = userDao.getByName( name );
 		log.debug( "Got user[" + re + "] successfully." );
 		return re;
 	}
 
 	@Override
-	public void login( UserEntity user ) {
+	public void login( User user ) {
 		if ( null == user ) {
 			throw new NullPointerException( "User could not be null." );
 		}
@@ -115,7 +115,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void logout( UserEntity user ) {
+	public void logout( User user ) {
 		if ( null == user ) {
 			throw new NullPointerException( "User could not be null." );
 		}
@@ -134,7 +134,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean isUserLogined( UserEntity user ) {
+	public boolean isUserLogined( User user ) {
 		// TODO Auto-generated method stub
 		return false;
 	}

@@ -11,7 +11,7 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import cn.amychris.therichcity.dao.UserDao;
-import cn.amychris.therichcity.entity.UserEntity;
+import cn.amychris.therichcity.entity.User;
 
 /*
  * @author Amy Zhang
@@ -28,21 +28,21 @@ public class UserDaoHbm implements UserDao {
 
 	@SuppressWarnings ( "unchecked" )
 	@Override
-	public UserEntity getByEmail ( String email ) {
+	public User getByEmail ( String email ) {
 
 		if ( null == email ) {
 			throw new NullPointerException( "email cann't be null." );
 		}
 
-		UserEntity user = new UserEntity();
+		User user = new User();
 		user.setEmail( email );
-		List<UserEntity> list = (List<UserEntity>) this.hibernateTemplate.findByExample( user );
+		List<User> list = (List<User>) this.hibernateTemplate.findByExample( user );
 
 		return list.isEmpty() ? null : list.get( 0 );
 	}
 
 	@Override
-	public Long insert ( UserEntity user ) {
+	public Long insert ( User user ) {
 		if ( null == user.getEmail() || null == user.getName() || null == user.getPassword() ) {
 			throw new NullPointerException( "email and name and password cann't be null." );
 		}
@@ -62,10 +62,10 @@ public class UserDaoHbm implements UserDao {
 			return;
 		}
 
-		List<UserEntity> entities = new ArrayList<UserEntity>();
+		List<User> entities = new ArrayList<User>();
 
 		for ( Long uuid : uuids ) {
-			UserEntity user = new UserEntity();
+			User user = new User();
 			user.setUuid( uuid );
 			entities.add( user );
 		}
@@ -74,22 +74,22 @@ public class UserDaoHbm implements UserDao {
 	}
 
 	@Override
-	public void update ( UserEntity user ) {
+	public void update ( User user ) {
 		user.setLastUpdateTime( null );
 		user.setRegisterDate( null );
 		this.hibernateTemplate.update( user );
 	}
 
 	@Override
-	public UserEntity getByName ( String name ) {
+	public User getByName ( String name ) {
 		if ( null == name ) {
 			throw new NullPointerException( "name cann't be null." );
 		}
 
-		UserEntity user = new UserEntity();
+		User user = new User();
 		user.setName( name );
 		@SuppressWarnings ( "unchecked" )
-		List<UserEntity> list = (List<UserEntity>) this.hibernateTemplate.findByExample( user );
+		List<User> list = (List<User>) this.hibernateTemplate.findByExample( user );
 
 		return list.isEmpty() ? null : list.get( 0 );
 	}

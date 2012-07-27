@@ -4,7 +4,7 @@
 
 <hibernate-mapping schema="theRichCity" package="cn.amychris.therichcity.entity" auto-import="true">
 
-	<class name="UserEntity" table="t_user">
+	<class name="User" table="t_user">
 		<id name="uuid" type="java.lang.Long" unsaved-value="null">
 			<column name="uuid" length="8" not-null="true"/>
 			<generator class="identity"/>

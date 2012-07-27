@@ -1,8 +1,8 @@
 package cn.amychris.therichcity.command;
 
-import cn.amychris.therichcity.entity.UserEntity;
+import cn.amychris.therichcity.entity.Board;
+import cn.amychris.therichcity.entity.User;
 import cn.amychris.therichcity.exception.CommandExecutingException;
-import cn.amychris.therichcity.game.Board;
 import cn.amychris.therichcity.service.BoardService;
 import cn.amychris.therichcity.util.StringUtil;
 
@@ -17,7 +17,7 @@ public class CreateBoard implements Command {
 	@Override
 	public String execute( Object arg ) {
 		try {
-			UserEntity user = (UserEntity)arg;
+			User user = (User)arg;
 			Board board = this.tableService.createBoard( user );
 			return StringUtil.toJSONString( board );
 			

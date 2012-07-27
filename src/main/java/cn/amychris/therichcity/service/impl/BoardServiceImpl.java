@@ -8,9 +8,9 @@ import java.util.Map;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-import cn.amychris.therichcity.entity.UserEntity;
+import cn.amychris.therichcity.entity.Board;
+import cn.amychris.therichcity.entity.User;
 import cn.amychris.therichcity.exception.BoardServiceException;
-import cn.amychris.therichcity.game.Board;
 import cn.amychris.therichcity.service.BoardService;
 
 @Scope("singleton")
@@ -21,7 +21,7 @@ public class BoardServiceImpl implements BoardService {
 
 	private Map<Integer, Board>		boards				= new HashMap<Integer, Board>();
 
-	private Map<UserEntity, Board>	userBoards			= new HashMap<UserEntity, Board>();
+	private Map<User, Board>	userBoards			= new HashMap<User, Board>();
 
 	@Override
 	public List<Board> getAllBoards() {
@@ -40,21 +40,21 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public Board createBoard( UserEntity boardCreator ) {
-		int boardNumber = getNewBoardNumber();
+	public Board createBoard( User boardCreator ) {
+		byte boardNumber = getNewBoardNumber();
 
 		Board board = new Board();
 		board.setBoardNumber( boardNumber );
-		board.setBoardCreator( boardCreator );
+		board.setBoardMaster( boardCreator );
 		board.setMaxPlayers( this.getMaxPlayersPerBoard() );
 
-		boards.put( boardNumber, board );
+		//boards.put( boardNumber, board );
 		userBoards.put( boardCreator, board );
 		return board;
 	}
 
 	@Override
-	public void joinBoard( int boardNumber, UserEntity user ) {
+	public void joinBoard( int boardNumber, User user ) {
 
 		if ( userBoards.containsKey( user ) ) {
 			throw new BoardServiceException( "User[" + user
@@ -71,13 +71,13 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void startGame( int boardNumber, UserEntity boardCreator ) {
+	public void startGame( int boardNumber, User boardCreator ) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void quitBoard( UserEntity user ) {
+	public void quitBoard( User user ) {
 		Board board = this.userBoards.get( user );
 		
 		if ( null == board ) {
@@ -99,10 +99,12 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	// return an available board number which starts from 1
-	private int getNewBoardNumber() {
-		int re = 0;
+	private byte getNewBoardNumber() {
+		byte re = 0;
+		
 		while ( boards.containsKey( ++re ) ) {
 		}
+		
 		return re;
 	}
 

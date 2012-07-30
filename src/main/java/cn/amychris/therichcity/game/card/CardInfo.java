@@ -1,4 +1,4 @@
-package cn.amychris.therichcity.game;
+package cn.amychris.therichcity.game.card;
 
 import java.awt.Color;
 import java.net.URL;

@@ -2,18 +2,18 @@ package cn.amychris.therichcity.game;
 
 import java.util.List;
 
-import cn.amychris.therichcity.game.constructure.Constructure;
-import cn.amychris.therichcity.game.role.Role;
+import cn.amychris.therichcity.game.card.ConstructureCard;
+import cn.amychris.therichcity.game.card.RoleCard;
 
 public interface Game extends Runnable {
 
-	List<Role> getAvailableRoles();
+	List<RoleCard> getAvailableRoles();
 	
-	List<Role> getSelectedRoles();
+	List<RoleCard> getSelectedRoles();
 	
-	Constructure[] getTop2Constructures();
+	ConstructureCard[] getTop2Constructures();
 	
-	void pickConstructure(Constructure constructure);
+	void pickConstructure(ConstructureCard constructureCard);
 	
 	List<Player> getPlayers();
 }

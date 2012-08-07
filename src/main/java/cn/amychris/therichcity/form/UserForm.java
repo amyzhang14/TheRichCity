@@ -7,53 +7,43 @@ public class UserForm implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 6924860564881794725L;
+	private static final long	serialVersionUID	= 6924860564881794725L;
 
-	private String name;
-	private String password;
-	private String confirmPassword;
-	private String newPassword;
-	private String email;
+	private String				name;
+	private String				password;
+	private String				newPassword;
+	private String				email;
 
-	public String getName () {
+	public String getName() {
 		return name;
 	}
 
-	public void setName (String name) {
+	public void setName( String name ) {
 		this.name = name;
 	}
 
-	public String getPassword () {
+	public String getPassword() {
 		return password;
 	}
 
-	public void setPassword (String password) {
+	public void setPassword( String password ) {
 		this.password = password;
 	}
 
-	public String getConfirmPassword () {
-		return confirmPassword;
-	}
-
-	public void setConfirmPassword (String confirmPassword) {
-		this.confirmPassword = confirmPassword;
-	}
-
-	public String getEmail () {
+	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail (String email) {
+	public void setEmail( String email ) {
 		this.email = email;
 	}
 
-	public String getNewPassword () {
+	public String getNewPassword() {
 		return newPassword;
 	}
 
-	public void setNewPassword (String newPassword) {
+	public void setNewPassword( String newPassword ) {
 		this.newPassword = newPassword;
 	}
 
-	
 }

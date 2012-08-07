@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping schema="theRichCity" package="cn.amychris.therichcity.entity" auto-import="true">
+
+	<class name="Board" table="t_user">
+		<id name="uuid" type="java.lang.Short" unsaved-value="null">
+			<column name="uuid" length="2" not-null="true"/>
+			<generator class="assigned"/>
+		</id>
+		
+		<property name="isStarted" type="java.lang.Boolean">
+			<column name="is_sted" length="1" not-null="true"/>
+		</property>
+		
+		<property name="maxPlayers" type="java.lang.Byte">
+			<column name="max_pls" length="1" not-null="true"/>
+		</property>
+		
+		<property name="registerDate" type="java.util.Date">
+			<column name="rgst_dt" />
+		</property>
+		
+		<property name="lastUpdateTime" type="java.util.Date">
+			<column name="lst_updt_tme" />
+		</property>
+		
+	</class>
+	
+	
+
+</hibernate-mapping>

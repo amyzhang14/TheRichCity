@@ -2,18 +2,18 @@ package cn.amychris.therichcity.dao;
 
 import java.util.List;
 
-import cn.amychris.therichcity.entity.UserEntity;
+import cn.amychris.therichcity.model.User;
 
 public interface UserDao {
 	
 	
-	UserEntity getByEmail(String email);
+	User getByEmail(String email);
 	
-	UserEntity getByName(String name);
+	User getByName(String name);
 
-	Long insert(UserEntity user);
+	Long insert(User user);
 
 	void delete(List<Long> uuid);
 
-	void update(UserEntity user);
+	void update(User user);
 }
